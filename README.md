@@ -8,13 +8,13 @@ https://fairdrop.io/
 
 #### Thanks
 
-Cryptonote Developers, Bytecoin Developers, Monero Developers, Forknote Project, Xenium Community, Avrio Developer
+Cryptonote Developers, Bytecoin Developers, Monero Developers, Forknote Project, Xenium Community, Avrio Developer and TrutleCoin Devs.
 
 #### People who support project.
 Rioda, Puip, Lemoe ,The Don ,Reborn ,Paul Bismuth ,Leo Cornelius(Also dev):) ,Telcontar ,Emiel and lot more.
 ### Copypasta for license when editing files
 
-Hi redStone contributor, thanks for forking and sending back Pull Requests. Extensive docs about contributing are in the works or elsewhere. For now this is the bit we need to get into all the files we touch. Please add it to the top of the files, see [src/CryptoNoteConfig.h](https://github.com/turtlecoin/turtlecoin/commit/28cfef2575f2d767f6e512f2a4017adbf44e610e) for an example.
+Hi RedStone contributor, thanks for forking and sending back Pull Requests. Extensive docs about contributing are in the works or elsewhere. For now this is the bit we need to get into all the files we touch. Please add it to the top of the files, see [src/CryptoNoteConfig.h](https://github.com/turtlecoin/turtlecoin/commit/28cfef2575f2d767f6e512f2a4017adbf44e610e) for an example.
 
 ```x
 // Copyright (c) 2012-2017, The CryptoNote developers, The Bytecoin developers,
