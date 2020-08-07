@@ -53,11 +53,9 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y libboost-all-dev libssl-dev ${{ matrix.package_name }}
-
       - name: Setup ccache
         run: |
           sudo apt install ccache
-
       - name: Retrieve ccache
         uses: actions/cache@v1
         with:
@@ -73,14 +71,12 @@ jobs:
         run: |
           mkdir build && cd build
           cmake -DARCH=default -DCMAKE_BUILD_TYPE=Release -DSTATIC=true ..
-
       # Build for linux
       - name: Build
         if: matrix.build_name != 'aarch64'
         run: |
           cd build
           make -j2
-
       # Build for aarch64
       - name: Prepare and Build (aarch64)
         if: matrix.build_name == 'aarch64'
@@ -92,14 +88,12 @@ jobs:
           cd src
           TARGETS="TurtleCoind miner zedwallet turtle-service cryptotest wallet-api wallet-upgrader"
           ${STRIP} ${TARGETS}
-
       # Test the crypto
       - name: Test Crypto
         if: matrix.build_name != 'aarch64'
         run: |
           cd build/src
           ./cryptotest
-
       # Prepare for deploy
       - name: Prepare for Deploy
         id: before_deploy
@@ -118,7 +112,6 @@ jobs:
           echo ::set-output name=binary_path::turtlecoin-${TAG}
           echo ::set-output name=artifact_name::turtlecoin-${LABEL}-${TAG}
           echo ::set-output name=file_name::turtlecoin-${LABEL}-${TAG}.tar.gz
-
       # Upload to GH Release
       - name: Upload to GH Release
         if: github.event_name == 'release' && matrix.deployable
@@ -157,7 +150,6 @@ jobs:
           brew install --force boost llvm@8 ccache
           brew link --force llvm@8
           ln -s /usr/local/opt/llvm@8 /usr/local/opt/llvm
-
       - name: Retrieve ccache
         uses: actions/cache@v1
         with:
@@ -169,20 +161,17 @@ jobs:
         run: |
           mkdir build && cd build
           cmake -DARCH=default -DCMAKE_BUILD_TYPE=Release -DSTATIC=true ..
-
       # Build for macOS
       - name: Build
         run: |
           cd build
           make -j2
-
       # Test the crypto
       - name: Test Crypto
         if: matrix.build_name != 'aarch64'
         run: |
           cd build/src
           ./cryptotest
-
       # Prepare for deploy
       - name: Prepare for Deploy
         id: before_deploy
@@ -201,8 +190,6 @@ jobs:
           echo ::set-output name=binary_path::turtlecoin-${TAG}
           echo ::set-output name=artifact_name::turtlecoin-${LABEL}-${TAG}
           echo ::set-output name=file_name::turtlecoin-${LABEL}-${TAG}.tar.gz
-
-
       # Upload to GH Release
       - name: Upload to GH Release
         if: github.event_name == 'release'
@@ -250,7 +237,6 @@ jobs:
           mkdir build
           cd build
           cmake -G "Visual Studio 16 2019" -A x64 .. -DARCH=default -DBOOST_ROOT="$env:BOOST_ROOT_1_69_0"
-
       # Build for Windows
       - name: Build
         run: |
@@ -258,14 +244,12 @@ jobs:
           $env:PATH = "$env:PATH;$env:MSBUILD_PATH"
           cd build
           MSBuild TurtleCoin.sln /p:CLToolExe=clcache.exe /p:Configuration=Release /p:PlatformToolset=v141 /m
-
       # Test the crypto
       - name: Test Crypto
         shell: bash
         run: |
           cd build/src/Release
           ./cryptotest.exe
-
       # Prepare for deploy
       - name: Prepare for Deploy
         shell: bash
@@ -283,8 +267,6 @@ jobs:
           echo ::set-output name=binary_path::turtlecoin-${TAG}
           echo ::set-output name=artifact_name::turtlecoin-${LABEL}-${TAG}
           echo ::set-output name=file_name::turtlecoin-${LABEL}-${TAG}.zip
-
-
       # Upload to GH Release
       - name: Upload to GH Release
         if: github.event_name == 'release'
